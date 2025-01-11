@@ -62,8 +62,15 @@ function getMaxNumber(a, b, c) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  if (
+    Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y) ||
+    (queen.x === queen.y && king.x === king.y) ||
+    queen.x === king.x ||
+    queen.y === king.y
+  )
+    return true;
+  return false;
 }
 
 /**
@@ -184,8 +191,11 @@ function convertNumberToString(numberStr) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  for (let i = 0; i < Math.ceil(str.length / 2); i += 1) {
+    if (str[i] !== str[str.length - 1 - i]) return false;
+  }
+  return true;
 }
 
 /**
@@ -202,8 +212,11 @@ function isPalindrome(/* str */) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === letter) return i;
+  }
+  return -1;
 }
 
 /**
@@ -221,8 +234,13 @@ function getIndexOf(/* str, letter */) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  let number = num;
+  while (number > 0) {
+    if (number % 10 === digit) return true;
+    number = Math.floor(number / 10);
+  }
+  return false;
 }
 
 /**
@@ -300,8 +318,19 @@ function rotateMatrix(/* matrix */) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(/* arr */) {
-  throw new Error('Not implemented');
+function sortByAsc(arr) {
+  const arr2 = arr;
+  const n = arr2.length;
+  for (let i = 0; i < n - 1; i += 1) {
+    for (let j = 0; j < n - 1 - i; j += 1) {
+      if (arr2[j + 1] < arr2[j]) {
+        const t = arr2[j + 1];
+        arr2[j + 1] = arr2[j];
+        arr2[j] = t;
+      }
+    }
+  }
+  return arr;
 }
 
 /**
@@ -321,8 +350,19 @@ function sortByAsc(/* arr */) {
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
-function shuffleChar(/* str, iterations */) {
-  throw new Error('Not implemented');
+function shuffleChar(str, iterations) {
+  let oldStr = str;
+  for (let i = 0; i < iterations; i += 1) {
+    let newStr = '';
+    for (let j = 0; j < oldStr.length; j += 2) {
+      newStr += oldStr[j];
+    }
+    for (let j = 1; j < oldStr.length; j += 2) {
+      newStr += oldStr[j];
+    }
+    oldStr = newStr;
+  }
+  return oldStr;
 }
 
 /**
